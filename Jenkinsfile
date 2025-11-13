@@ -17,20 +17,24 @@ pipeline {
         stage('Build') {
             steps {
                 sh '''
-                   python3 -m venv venv
-                   . venv/bin/activate
-                   pip install --upgrade pip
-                   pip install -r app/requirements.txt
-                   '''
-                   }     
-                 } 
+                #!/bin/bash
+                python3 -m venv venv
+                . venv/bin/activate
+                pip install --upgrade pip
+                pip install -r app/requirements.txt
+                '''
+            }
+        }
 
-
-         stage('Test') {
-             steps {
-                  sh 'venv/bin/pytest app/test_app.py'
-                 }
-               }
+        stage('Test') {
+            steps {
+                sh '''
+                #!/bin/bash
+                . venv/bin/activate
+                venv/bin/pytest app/test_app.py
+                '''
+            }
+        }
 
 
         stage('Docker Build') {
