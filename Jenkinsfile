@@ -16,9 +16,15 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'pip install -r app/requirements.txt'
-            }
-        }
+                sh '''
+                   python3 -m venv venv
+                   source venv/bin/activate
+                   pip install --upgrade pip
+                   pip install -r app/requirements.txt
+                   '''
+                   }     
+                 } 
+
 
         stage('Test') {
             steps {
