@@ -26,11 +26,12 @@ pipeline {
                  } 
 
 
-        stage('Test') {
-            steps {
-                sh 'pytest app/test_app.py'
-            }
-        }
+         stage('Test') {
+             steps {
+                  sh 'venv/bin/pytest app/test_app.py'
+                 }
+               }
+
 
         stage('Docker Build') {
             steps {
